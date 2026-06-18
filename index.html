@@ -24,7 +24,7 @@
   --shadow:8px 8px 0 var(--black); --shadow-orange:8px 8px 0 var(--orange);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:74px}
 body{background:var(--black);color:var(--white);font-family:'Noto Sans JP',sans-serif;font-weight:400;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.05;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 ::selection{background:var(--orange);color:#fff}
@@ -34,10 +34,11 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;o
 .display{font-family:'Bebas Neue',sans-serif;letter-spacing:.01em;line-height:.92}
 .mono{font-family:'Roboto Mono',monospace}
 h2.sec-title{font-weight:900;font-size:clamp(28px,5vw,52px);line-height:1.05;letter-spacing:-.01em;margin-top:.35em}
-.lead{color:var(--muted);font-size:clamp(15px,1.7vw,18px);max-width:960px}
+.lead{color:var(--muted);font-size:clamp(15px,1.7vw,18px);max-width:none}
 
-.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.wrap{max-width:1500px;margin:0 auto;padding:0 24px}
 section{padding:clamp(72px,10vw,124px) 0;position:relative}
+section.alt{background:#16171C}
 .divider{height:2px;background:var(--line);width:100%}
 
 a{color:inherit}
@@ -52,21 +53,22 @@ a{color:inherit}
 .btn:focus-visible,a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 
 .nav{position:sticky;top:0;z-index:50;background:rgba(13,13,13,.82);backdrop-filter:blur(8px);border-bottom:2px solid var(--line)}
-.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav .wrap{display:flex;align-items:center;gap:16px;height:64px}
 .brand{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.06em;display:flex;align-items:center;gap:10px}
 .brand .dot{width:12px;height:12px;background:var(--orange);display:inline-block}
-.nav-links{display:flex;gap:22px;align-items:center}
-.nav-links a{font-size:13px;color:var(--muted);text-decoration:none;letter-spacing:.04em;transition:color .2s}
+.nav-links{display:flex;gap:22px;align-items:center;flex:1;justify-content:center;overflow-x:auto;scrollbar-width:none}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{font-size:13px;color:var(--muted);text-decoration:none;letter-spacing:.04em;transition:color .2s;white-space:nowrap}
 .nav-links a:hover{color:#fff}
-.nav-cta{font-family:'Bebas Neue',sans-serif;letter-spacing:.1em;background:var(--orange);color:#fff!important;padding:8px 16px;font-size:15px}
-@media(max-width:980px){.nav-links a:not(.nav-cta){display:none}}
+.nav-cta{font-family:'Bebas Neue',sans-serif;letter-spacing:.1em;background:var(--orange);color:#fff!important;padding:8px 16px;font-size:15px;flex:none;white-space:nowrap}
+@media(max-width:980px){.nav-links{justify-content:flex-start;gap:16px}.nav-links a{font-size:12px}.brand{font-size:22px}}
 
 .hero{padding-top:clamp(56px,9vw,104px);overflow:hidden}
 .hero-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:48px;align-items:end}
 @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:32px}}
 .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(72px,15vw,196px);line-height:.82;letter-spacing:.005em;margin:.18em 0 .12em}
 .hero h1 .or{color:var(--orange)}
-.hero-sub{font-size:clamp(16px,2vw,21px);color:var(--white);max-width:46ch;font-weight:500}
+.hero-sub{font-size:clamp(16px,2vw,21px);color:var(--white);max-width:none;font-weight:500}
 .hero-sub b{color:var(--gold)}
 .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
 .hero-card{border:2px solid var(--line);background:var(--panel);padding:24px;box-shadow:var(--shadow)}
@@ -115,6 +117,14 @@ a{color:inherit}
 .trait{border:2px solid var(--line);background:var(--panel-2);padding:18px}
 .trait h4{font-size:15px;margin-bottom:6px;color:var(--gold)}
 .trait p{font-size:13px;color:var(--muted)}
+.phi-wrap{border:2px solid var(--gold);background:rgba(200,169,110,.05);padding:clamp(22px,3vw,34px);margin-top:18px;box-shadow:6px 6px 0 #000}
+.phi-eyebrow{font-family:'Bebas Neue';letter-spacing:.18em;color:var(--gold);font-size:14px;margin-bottom:16px}
+.phi-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:720px){.phi-grid{grid-template-columns:1fr}}
+.phi{border-left:3px solid var(--orange);padding-left:14px}
+.phi-term{font-family:'Bebas Neue','Noto Sans JP';font-weight:900;font-size:clamp(22px,3.5vw,30px);color:#fff;letter-spacing:.03em}
+.phi-mean{color:var(--muted);font-size:14px;margin-top:6px}
+.phi-belief{margin-top:18px;color:var(--gold-soft);font-size:15px;line-height:1.85;border-top:1px dashed var(--line);padding-top:16px}
 
 .roster-block{margin-top:18px}
 .roster-h{font-family:'Bebas Neue';letter-spacing:.08em;font-size:22px;color:var(--orange);margin:26px 0 10px;display:flex;align-items:center;gap:12px}
@@ -145,7 +155,7 @@ a{color:inherit}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .step .q-eyebrow{font-family:'Roboto Mono';font-size:12px;color:var(--orange);letter-spacing:.1em;margin-bottom:10px}
 .step h3{font-weight:900;font-size:clamp(22px,3.4vw,34px);line-height:1.2;margin-bottom:10px}
-.step p.sub{color:var(--muted);margin-bottom:22px;max-width:70ch}
+.step p.sub{color:var(--muted);margin-bottom:22px;max-width:none}
 .opts{display:grid;gap:14px;grid-template-columns:1fr 1fr;margin-top:6px}
 @media(max-width:620px){.opts{grid-template-columns:1fr}}
 .opt{text-align:left;background:var(--panel-2);color:#fff;border:2px solid var(--line);padding:18px 20px;cursor:pointer;font-family:inherit;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:space-between;gap:12px;transition:transform .12s,border-color .15s,background .15s}
@@ -234,7 +244,7 @@ a{color:inherit}
 
 .contact{background:var(--orange);color:#000}
 .contact h2{font-family:'Bebas Neue';font-size:clamp(44px,9vw,110px);line-height:.85;color:#000}
-.contact .lead{color:#1a0d00;max-width:52ch;font-weight:500}
+.contact .lead{color:#1a0d00;max-width:none;font-weight:500}
 .contact .btn{background:#000;border-color:#000;color:#fff;box-shadow:6px 6px 0 rgba(0,0,0,.35)}
 .contact .btn:hover{background:#111}
 .contact .btn.gh{background:#fff;color:#000;border-color:#fff}
@@ -267,8 +277,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
       <a href="#diagnose">診断</a>
       <a href="#plans">プラン</a>
       <a href="#simulator">シミュレーター</a>
-      <a href="#contact" class="nav-cta">お問い合わせ</a>
     </div>
+    <a href="#contact" class="nav-cta">お問い合わせ</a>
   </div>
 </nav>
 
@@ -291,7 +301,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
 
 <div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
 
-<section id="why">
+<section id="why" class="alt">
   <div class="wrap">
     <div class="kicker-row"><span class="bar"></span><span class="eyebrow">WHY ESPORTS</span></div>
     <h2 class="sec-title">広告は「数」より<br>「熱量」で効く。</h2>
@@ -317,6 +327,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
     <p class="lead" id="aboutIntro" style="margin-top:6px"></p>
     <div class="traits" id="traits"></div>
     <div id="ownerBox" style="margin-top:18px"></div>
+    <div id="philosophy"></div>
     <div class="about-grid">
       <div class="panelbox"><h3>経歴 / HISTORY</h3><ul class="timeline" id="history"></ul></div>
       <div class="panelbox"><h3>実績 / ACHIEVEMENTS</h3><ul class="achieve" id="achievements"></ul></div>
@@ -326,7 +337,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
 
 <div class="divider"></div>
 
-<section id="roster">
+<section id="roster" class="alt">
   <div class="wrap">
     <div class="kicker-row"><span class="bar"></span><span class="eyebrow">ROSTER</span></div>
     <h2 class="sec-title">現メンバー。</h2>
@@ -359,7 +370,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
 
 <div class="divider"></div>
 
-<section id="explore">
+<section id="explore" class="alt">
   <div class="wrap">
     <div class="kicker-row"><span class="bar"></span><span class="eyebrow gold">READ FREELY</span></div>
     <h2 class="sec-title">気になるところだけ、<br>開いて読む。</h2>
@@ -401,19 +412,19 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
     <div class="kicker-row"><span class="bar"></span><span class="eyebrow gold">PARTNERSHIP PLANS</span></div>
     <h2 class="sec-title">3つのプラン。</h2>
     <p class="lead" style="margin-top:16px">おすすめ基準：ご予算（シーズン換算）で選べる最上位プランを表示します。まずは小さくお試しからでOK。気軽にご相談ください。</p>
-    <div class="note" style="max-width:960px">※掲載の数値はすべて<b>推定（目標とする想定値）</b>で、実績の保証ではありません。私たちが目指す規模感を示すものです。具体的な内容・数値は、お打ち合わせを重ねながら一緒に明確にしていきます。</div>
+    <div class="note">※掲載の数値はすべて<b>推定（目標とする想定値）</b>で、実績の保証ではありません。私たちが目指す規模感を示すものです。具体的な内容・数値は、お打ち合わせを重ねながら一緒に明確にしていきます。</div>
     <div class="tiers" id="tiers"></div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<section id="simulator">
+<section id="simulator" class="alt">
   <div class="wrap">
     <div class="kicker-row"><span class="bar"></span><span class="eyebrow">SIMULATOR</span></div>
     <h2 class="sec-title">予算を入れて、<br>比較してみる。</h2>
     <p class="lead" style="margin:16px 0 30px">ご予算を入れるだけで、99Divine経由の概算リーチ・CPM・他の広告媒体との違いをその場で確認できます。</p>
-    <div class="note" style="max-width:960px">※数値は<b>推定（目標とする想定値）</b>で実績の保証ではありません。具体的な内容はお打ち合わせで明確にしていきます。</div>
+    <div class="note">※数値は<b>推定（目標とする想定値）</b>で実績の保証ではありません。具体的な内容はお打ち合わせで明確にしていきます。</div>
     <div class="calc">
       <div class="in-side">
         <h4>条件を入力</h4>
@@ -499,29 +510,38 @@ const CONFIG = {
   about: {
     slogan: "ALWAYS CHASE THE 1%",
     motto: "LUCE IN ALTIS",
-    intro: "99DIVINEは、2024年7月に設立された、OWCS（Overwatch公式世界リーグ）の日本シーンで戦うeスポーツチーム。競技チームに加えてストリーマー部門やアカデミーを持ち、大会の枠を越えて幅広い層へ届く構造を強みにしています。",
+    intro: "99DIVINEは2024年設立のeスポーツチーム。チーム名には「99から100へ＝完璧に到達するための、無限の挑戦と可能性」という意味を込めています。OWCS Pacificで王者となったのち、2025年に拠点を日本へ移籍。競技チームに加え、ストリーマー部門・アカデミー・自主大会を擁し、大会の枠を越えて幅広い層へ届く構造を強みにしています。",
     owner: {
       name: "Supreme",
       realName: "佐藤 潤隼 / Mitsutoshi Sato",
       role: "Founder / Owner / Coach / Player",
-      bio: "佐藤 潤隼（Mitsutoshi \"Supreme\" Sato、1996年生まれ／日本・韓国のルーツ）。米ユタ・バレー大学でプロパイロットを志したのち、UCアーバイン校でコンピュータサイエンスを専攻し、同校のOverwatchプロチームでプレイ。2024年7月に99DIVINEを設立し、Founder / CEO として運営。ゼネラルマネージャー、ヘッドコーチを経て、現在はメインサポートのプレイヤーも兼任。29歳でチャンピオンランクに到達。2026年、Fnatic JP のコーチングメンターに就任。",
+      bio: "佐藤 潤隼（Mitsutoshi \"Supreme\" Sato／1996年9月24日生）。韓国生まれ、日本とアメリカで育つ。パイロットライセンスを持ちながら、UCアーバインのOverwatchチームでプレイ。2024年に99DIVINEを設立し、選手兼CEOとして運営。OWCS Pacificを制したのち、王者の座を手放して自己資金とルーキーと共に日本へ。2026年にはFNATIC Apex（ALGS）へ短期コーチングメンターとしても参画。",
+    },
+    philosophy: {
+      items: [
+        { term:"ALWAYS CHASE THE 1%", meaning:"99から100へ。完璧に到達するための、終わりなき挑戦。最後の1%を追い続ける姿勢を表します。" },
+        { term:"LUCE IN ALTIS", meaning:"ラテン語で「高みで光を放つ」。深い闇から高みへ進み、光を放つ——その光で、日本のeスポーツと次世代の未来を照らす。" },
+      ],
+      belief: "パシフィック王者の座を手放し、自己資金を投じてルーキーと共に新天地・日本へ。背景にあるのは、eスポーツで「善い影響力」を発揮したいという信念です。成績や勝敗だけでなく、コンテンツとストーリーでファンと一体感を築くこと——それが私たちの運営哲学。ファンの応援こそが、私たちの力であり、未来を照らす光です。",
     },
     traits: [
       { title:"多国籍ロスター", text:"日本・韓国・北米拠点のメンバーが在籍。日・韓・英語圏のコミュニティへネイティブな距離感で届きます。" },
-      { title:"競技 × ストリーマー", text:"競技シーンだけでなく、ストリーマー部門やアカデミーで日常配信の幅広い層にもリーチできる構造です。" },
+      { title:"競技 × ストリーマー", text:"競技シーンに加え、ストリーマー部門・アカデミー・大型配信者との共同チームで、日常配信の幅広い層にもリーチ。日本のOWシーンを盛り上げてきました。" },
       { title:"人間性でスカウト", text:"ストリーマーは実力に加え人間性を重視して迎え入れています。ブランドを預けても安心の座組みです。" },
     ],
     history: [
-      { date:"2024", text:"7月、Supreme が 99DIVINE を設立。OWCS への参戦を開始。" },
-      { date:"2024", text:"OWCS 2024 Asia Stage 2 で準優勝。" },
-      { date:"2025", text:"OWCS 2025 Asia Stage 1 で優勝。" },
-      { date:"2026", text:"OWCS Japan Stage 2 に参戦。Supreme が Fnatic JP コーチングメンターに就任。" },
+      { date:"2024", text:"Supreme が 99DIVINE を設立し、OWCS Pacific に参戦。" },
+      { date:"2024", text:"Ta1yo・Romani・Frogger ら人気配信者との姉妹チーム『Miku Fan Club × 99DIVINE』で日本のOWシーンを盛り上げる。" },
+      { date:"2025", text:"OWCS Pacific Stage 1 優勝・Stage 2 準優勝（通算 Pacific 優勝1回・準優勝2回）。" },
+      { date:"2025", text:"7月、パシフィック王者の座を手放し、自己資金とルーキーと共に日本リージョンへ移籍。" },
+      { date:"2026", text:"OWCS Japan を継続参戦。Supreme は FNATIC Apex（ALGS）へ短期コーチングメンターとして参画。" },
     ],
     achievements: [
-      "OWCS 2025 Asia Stage 1 ― 優勝（1位）",
-      "OWCS 2024 Asia Stage 2 ― 準優勝（2位）",
-      "最高同時視聴 40,066人（Esports Charts / 2024 Asia Stage 2）",
-      "Overwatch大会 累計獲得賞金 約 $25,000",
+      "OWCS Pacific：優勝1回・準優勝2回（Stage 1 優勝 ／ Stage 2 準優勝）",
+      "日本移籍後も上位圏で継続参戦（おおむね3〜4位前後 ／ 2026 Japan Stage 1：4位）",
+      "人気配信者と『Miku Fan Club × 99DIVINE』を結成し、日本のOWシーンを盛り上げた",
+      "自主大会『DIVINE CUP』を主催。アカデミー『99DV』で次世代育成にも注力",
+      "最高同時視聴 40,066人（Esports Charts）／ 大会 累計獲得賞金 約 $25,000",
     ],
   },
 
@@ -594,6 +614,8 @@ function buildAbout(){
       <div class="owner-head"><span class="nm">${esc(o.name)}</span><span class="rn">${esc(o.realName)} ・ ${esc(o.role)}</span></div>
       <p style="color:var(--muted);font-size:14px;margin-top:10px">${esc(o.bio)}</p>
     </div>` : "";
+  const ph=a.philosophy;
+  $("#philosophy").innerHTML = ph ? `<div class="phi-wrap"><div class="phi-eyebrow">PHILOSOPHY / 信念</div><div class="phi-grid">${ph.items.map(x=>`<div class="phi"><div class="phi-term">${esc(x.term)}</div><div class="phi-mean">${esc(x.meaning)}</div></div>`).join("")}</div><p class="phi-belief">${esc(ph.belief)}</p></div>` : "";
   $("#history").innerHTML = a.history.map(h=>`<li><span class="d">${esc(h.date)}</span><span>${esc(h.text)}</span></li>`).join("");
   $("#achievements").innerHTML = a.achievements.map(x=>`<li><span>${esc(x)}</span></li>`).join("");
 }
@@ -636,6 +658,7 @@ function progressTo(stepId){
   $("#progBar").style.width=Math.max(6,Math.min(100,(idx/(spine.length-1))*100))+"%";
   $("#stepCount").textContent=String(Math.min(spine.length,Math.max(1,Math.round(idx)+1))).padStart(2,"0");
 }
+function pinWizard(){ const shell=document.querySelector(".wizard-shell"); if(!shell) return; const nav=document.querySelector(".nav"); const navH=nav?nav.offsetHeight:64; const rect=shell.getBoundingClientRect(); if(rect.top < navH+4 || rect.top > window.innerHeight*0.5){ window.scrollTo(0, Math.max(0, rect.top + window.pageYOffset - (navH+12))); } }
 function go(stepId,push=true){ if(push) state.history.push(stepId); render(stepId); progressTo(stepId); $("#backBtn").style.visibility=state.history.length>1?"visible":"hidden"; }
 function back(){ if(state.history.length<=1) return; state.history.pop(); const p=state.history[state.history.length-1]; render(p); progressTo(p); $("#backBtn").style.visibility=state.history.length>1?"visible":"hidden"; }
 function periodSeg(){ return `<div class="seg"><button data-period="season" class="${state.period==='season'?'on':''}">シーズン（3〜4か月）</button><button data-period="month" class="${state.period==='month'?'on':''}">月間</button></div>`; }
@@ -836,8 +859,8 @@ function bindStep(){
       if(action==="copySummary"){ e.preventDefault(); copySummary(wizardCtx(), el); return; }
       const backTo=el.getAttribute("data-back");
       if(backTo){ const idx=state.history.lastIndexOf(backTo);
-        if(idx>=0){ state.history=state.history.slice(0,idx+1); render(backTo); progressTo(backTo); $("#backBtn").style.visibility=state.history.length>1?"visible":"hidden"; } else go(backTo); return; }
-      const next=el.getAttribute("data-next"); if(next){ e.preventDefault?.(); go(next); }
+        if(idx>=0){ state.history=state.history.slice(0,idx+1); render(backTo); progressTo(backTo); $("#backBtn").style.visibility=state.history.length>1?"visible":"hidden"; pinWizard(); } else { go(backTo); pinWizard(); } return; }
+      const next=el.getAttribute("data-next"); if(next){ e.preventDefault?.(); go(next); pinWizard(); }
     });
   });
 }
@@ -963,8 +986,8 @@ document.addEventListener("DOMContentLoaded",()=>{
   buildHero(); buildTicker(); buildAbout(); buildRoster(); buildOwcsExplain();
   buildTiers(); buildCalc(); buildContact();
   go("intro",true);
-  $("#backBtn").addEventListener("click",back);
-  $("#restartBtn").addEventListener("click",()=>{ state.history=[]; state.budget=0; state.custom=false; state.period="season"; go("intro",true); });
+  $("#backBtn").addEventListener("click",()=>{ back(); pinWizard(); });
+  $("#restartBtn").addEventListener("click",()=>{ state.history=[]; state.budget=0; state.custom=false; state.period="season"; go("intro",true); pinWizard(); });
 });
 </script>
 </body>
