@@ -92,6 +92,7 @@ a{color:inherit}
 
 /* slogan */
 .slogan{font-family:'Bebas Neue','Noto Sans JP',sans-serif;font-weight:900;font-size:clamp(30px,6.5vw,68px);color:var(--orange);letter-spacing:.02em;line-height:.98;margin:30px 0 6px}
+.submotto{display:block;font-family:'Bebas Neue','Noto Sans JP',sans-serif;font-size:.42em;color:var(--gold);letter-spacing:.18em;margin-top:8px}
 
 /* ABOUT / ROSTER */
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
@@ -119,7 +120,7 @@ a{color:inherit}
 .roster-h{font-family:'Bebas Neue';letter-spacing:.08em;font-size:22px;color:var(--orange);margin:26px 0 10px;display:flex;align-items:center;gap:12px}
 .roster-h .jp{font-family:'Noto Sans JP';font-size:13px;color:var(--muted);letter-spacing:0}
 .roster-table{border:2px solid var(--line);background:var(--panel);overflow:hidden}
-.roster-table .r{display:grid;grid-template-columns:1.4fr 1.3fr .7fr 1fr 1.3fr;gap:10px;padding:13px 18px;border-bottom:1px solid var(--line);font-size:14px;align-items:center}
+.roster-table .r{display:grid;grid-template-columns:1.4fr 1.4fr 1fr 1.3fr;gap:10px;padding:13px 18px;border-bottom:1px solid var(--line);font-size:14px;align-items:center}
 .roster-table .r:last-child{border-bottom:0}
 .roster-table .r.head{background:#000;color:var(--muted);font-family:'Roboto Mono';font-size:11.5px;letter-spacing:.05em;text-transform:uppercase}
 .roster-table .r span:first-child{font-weight:700;color:#fff}
@@ -399,7 +400,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
   <div class="wrap">
     <div class="kicker-row"><span class="bar"></span><span class="eyebrow gold">PARTNERSHIP PLANS</span></div>
     <h2 class="sec-title">3つのプラン。</h2>
-    <p class="lead" style="margin-top:16px">おすすめ基準：ご予算（シーズン換算）で選べる最上位プランを表示します。金額・想定値は目安で、最終提案は個別にご相談ください。</p>
+    <p class="lead" style="margin-top:16px">おすすめ基準：ご予算（シーズン換算）で選べる最上位プランを表示します。まずは小さくお試しからでOK。気軽にご相談ください。</p>
+    <div class="note" style="max-width:960px">※掲載の数値はすべて<b>推定（目標とする想定値）</b>で、実績の保証ではありません。私たちが目指す規模感を示すものです。具体的な内容・数値は、お打ち合わせを重ねながら一緒に明確にしていきます。</div>
     <div class="tiers" id="tiers"></div>
   </div>
 </section>
@@ -411,6 +413,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
     <div class="kicker-row"><span class="bar"></span><span class="eyebrow">SIMULATOR</span></div>
     <h2 class="sec-title">予算を入れて、<br>比較してみる。</h2>
     <p class="lead" style="margin:16px 0 30px">ご予算を入れるだけで、99Divine経由の概算リーチ・CPM・他の広告媒体との違いをその場で確認できます。</p>
+    <div class="note" style="max-width:960px">※数値は<b>推定（目標とする想定値）</b>で実績の保証ではありません。具体的な内容はお打ち合わせで明確にしていきます。</div>
     <div class="calc">
       <div class="in-side">
         <h4>条件を入力</h4>
@@ -458,18 +461,17 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
 const CONFIG = {
   team: {
     name: "99DIVINE",
-    contactEmail: "sponsor@99divine.net",   // ← 連絡先メールに変更
-    xUrl: "https://x.com/",                  // ← 公式XのURLに変更
+    contactEmail: "99divine@99divine.net",   // 公式（記入シート空欄のため公開情報を使用）
+    xUrl: "https://x.com/99divine_",          // 公式X（@99divine_）
   },
 
-  seasonMonths: 3.5,   // 1シーズン＝約3〜4か月（月間⇄シーズン換算に使用）
+  seasonMonths: 3.5,
 
-  industry: {   // OWCS実績（出典: Esports Charts, 2025）— 基本そのままでOK
+  industry: {   // OWCS全体の実績（出典: Esports Charts, 2025）
     owcsAvgViewers: 114400, owcsPeakViewers: 177010, owcsHoursWatched: 4300000,
     owPeakRecord: 437006, prizePool2025USD: 3351502, regions: "アジア・北米・EMEA・中国",
   },
 
-  // 比較する広告媒体（CPMはすべて「目安」。実数に差し替えてください） ※下のdefaultが初期選択
   benchmarks: [
     { id:"youtube", label:"YouTube動画広告",        cpm:1500 },
     { id:"sns",     label:"SNS広告（X / Instagram）", cpm:1000 },
@@ -478,57 +480,73 @@ const CONFIG = {
   ],
   benchmarkDefault: "youtube",
 
-  // プラン（priceはご指定。impressions/reach は「想定値」で調整可。CPMは price/impressions から自動計算）
+  // プラン（価格はご指定。impressions/reach は「推定・目標値」＝うちの規模感ベース。CPMは自動計算）
   tiers: [
     { id:"bronze", rank:"TIER 3", name:"BRONZE", jp:"ブロンズ協賛",
-      tagline:"まずは低額トライアルから。",
-      price:200000,  impressions:130000, reach:40000,
+      tagline:"お試し感覚で、まずは一緒に。",
+      price:200000,  impressions:100000, reach:30000,
       feats:["配信オーバーレイにロゴ掲出","SNS投稿でのクレジット表記","シーズン総括レポート"] },
     { id:"silver", rank:"TIER 2", name:"SILVER", jp:"シルバー協賛",
       tagline:"1シーズンで、しっかり実証。",
-      price:400000,  impressions:300000, reach:90000,
+      price:400000,  impressions:280000, reach:80000,
       feats:["ブロンズの全特典","ユニフォーム / 配信背景にロゴ","選手・ストリーマー出演SNS 月1本","日・韓・英語圏への露出"] },
     { id:"gold",   rank:"TIER 1", name:"GOLD",   jp:"ゴールド協賛",
       tagline:"99DIVINEと共に、成長ストーリーを築く。",
-      price:1000000, impressions:850000, reach:250000,
+      price:1000000, impressions:800000, reach:220000,
       feats:["シルバーの全特典","冠大会 / 冠コンテンツの実施","選手・ストリーマー起用コラボ","専属担当による個別運用","四半期ごとの効果レポート"] },
   ],
 
-  // ===== 会社情報（雛形：実データを入力してください） =====
   about: {
-    slogan: "RISE WITH 99DIVINE",   // ← スローガン（変更可）。空にすると非表示
-    intro: "99Divineは、OWCS（Overwatchの公式世界リーグ）の日本シーンで戦うeスポーツチームです。競技チームに加えてストリーマー部門を持ち、大会の枠を越えて幅広い層へ届く構造を強みにしています。",
+    slogan: "ALWAYS CHASE THE 1%",
+    motto: "LUCE IN ALTIS",
+    intro: "99DIVINEは、2024年7月に設立された、OWCS（Overwatch公式世界リーグ）の日本シーンで戦うeスポーツチーム。競技チームに加えてストリーマー部門やアカデミーを持ち、大会の枠を越えて幅広い層へ届く構造を強みにしています。",
     owner: {
-      name: "Supreme",                 // 通称
-      realName: "Mitsutoshi Sato（佐藤 光俊）",  // ← 本名・漢字を確認のうえ修正
-      role: "Founder / Owner",
-      bio: "（オーナー Supreme の経歴を入力してください。例：これまでの活動・実績・チーム設立の経緯・ビジョンなど）",
+      name: "Supreme",
+      realName: "佐藤 潤隼 / Mitsutoshi Sato",
+      role: "Founder / Owner / Coach / Player",
+      bio: "佐藤 潤隼（Mitsutoshi \"Supreme\" Sato、1996年生まれ／日本・韓国のルーツ）。米ユタ・バレー大学でプロパイロットを志したのち、UCアーバイン校でコンピュータサイエンスを専攻し、同校のOverwatchプロチームでプレイ。2024年7月に99DIVINEを設立し、Founder / CEO として運営。ゼネラルマネージャー、ヘッドコーチを経て、現在はメインサポートのプレイヤーも兼任。29歳でチャンピオンランクに到達。2026年、Fnatic JP のコーチングメンターに就任。",
     },
     traits: [
       { title:"多国籍ロスター", text:"日本・韓国・北米拠点のメンバーが在籍。日・韓・英語圏のコミュニティへネイティブな距離感で届きます。" },
-      { title:"競技 × ストリーマー", text:"競技シーンだけでなく、ストリーマー部門で日常配信の幅広い層にもリーチできる二軸構造です。" },
+      { title:"競技 × ストリーマー", text:"競技シーンだけでなく、ストリーマー部門やアカデミーで日常配信の幅広い層にもリーチできる構造です。" },
       { title:"人間性でスカウト", text:"ストリーマーは実力に加え人間性を重視して迎え入れています。ブランドを預けても安心の座組みです。" },
     ],
-    history: [   // ← {date, text} を追加・編集
-      { date:"20XX", text:"（設立／チーム発足など、主な出来事を入力）" },
-      { date:"20XX", text:"（OWCS参戦・部門立ち上げなどを入力）" },
+    history: [
+      { date:"2024", text:"7月、Supreme が 99DIVINE を設立。OWCS への参戦を開始。" },
+      { date:"2024", text:"OWCS 2024 Asia Stage 2 で準優勝。" },
+      { date:"2025", text:"OWCS 2025 Asia Stage 1 で優勝。" },
+      { date:"2026", text:"OWCS Japan Stage 2 に参戦。Supreme が Fnatic JP コーチングメンターに就任。" },
     ],
-    achievements: [   // ← 文字列を追加・編集
-      "（実績を入力：大会成績・登録者数・最高同時視聴数 など）",
-      "（実績を入力）",
+    achievements: [
+      "OWCS 2025 Asia Stage 1 ― 優勝（1位）",
+      "OWCS 2024 Asia Stage 2 ― 準優勝（2位）",
+      "最高同時視聴 40,066人（Esports Charts / 2024 Asia Stage 2）",
+      "Overwatch大会 累計獲得賞金 約 $25,000",
     ],
   },
 
-  // ===== ロスター（雛形：行は自由に増減できます） =====
   roster: {
     players: [
-      { name:"（選手名）", role:"DPS / Tank / Support", gender:"—", nationality:"日本", language:"日本語 / 英語" },
+      { name:"Ichi",     role:"Player",           nationality:"JP / US",      language:"JP / EN" },
+      { name:"FodCarry", role:"Player",           nationality:"KR",           language:"KR / EN / JP" },
+      { name:"GACHAPIN", role:"Player",           nationality:"JP",           language:"JP" },
+      { name:"solace",   role:"Player",           nationality:"JP / CA / TW", language:"EN / JP" },
+      { name:"YangJun",  role:"Player",           nationality:"KR",           language:"KR" },
+      { name:"Sakume",   role:"Player",           nationality:"JP",           language:"JP" },
+      { name:"Supreme",  role:"Founder / Player", nationality:"JP / KR",      language:"JP / KR / EN" },
+      { name:"Gyomin",   role:"Coach",            nationality:"KR",           language:"KR" },
     ],
     streamers: [
-      { name:"（ストリーマー名）", role:"Streamer", gender:"—", nationality:"韓国", language:"韓国語 / 日本語" },
+      { name:"うたぼっと",          role:"Streamer", nationality:"JP",      language:"JP" },
+      { name:"NALA (NASLASTHOPE)", role:"Streamer", nationality:"JP / US", language:"JP / EN" },
     ],
     staff: [
-      { name:"（スタッフ名）", role:"Content / Manager 等", gender:"—", nationality:"—", language:"—" },
+      { name:"KAY",      role:"ビジネス / 実況解説",     nationality:"JP", language:"JP" },
+      { name:"うたぼっと", role:"ビジネス / ストリーマー", nationality:"JP", language:"JP" },
+      { name:"てんこ",    role:"デザイン",              nationality:"JP", language:"JP" },
+      { name:"えぢと",    role:"コンテンツ",            nationality:"JP", language:"JP / EN" },
+      { name:"YENA",     role:"デザイン",              nationality:"KR", language:"KR / EN" },
+      { name:"BINAH",    role:"デザイン",              nationality:"KR", language:"KR" },
     ],
   },
 };
@@ -567,7 +585,7 @@ function buildTicker(){
 }
 function buildAbout(){
   const a = CONFIG.about;
-  $("#slogan").innerHTML = a.slogan ? `“${esc(a.slogan)}”` : "";
+  $("#slogan").innerHTML = (a.slogan ? `“${esc(a.slogan)}”` : "") + (a.motto ? `<span class="submotto">${esc(a.motto)}</span>` : "");
   $("#aboutIntro").textContent = a.intro;
   $("#traits").innerHTML = a.traits.map(t=>`<div class="trait"><h4>${esc(t.title)}</h4><p>${esc(t.text)}</p></div>`).join("");
   const o = a.owner;
@@ -581,10 +599,10 @@ function buildAbout(){
 }
 function buildRoster(){
   const grp = (title, jp, arr) => {
-    const rows = (arr&&arr.length) ? arr.map(m=>`<div class="r"><span>${esc(m.name)}</span><span>${esc(m.role)}</span><span>${esc(m.gender)}</span><span>${esc(m.nationality)}</span><span>${esc(m.language)}</span></div>`).join("")
+    const rows = (arr&&arr.length) ? arr.map(m=>`<div class="r"><span>${esc(m.name)}</span><span>${esc(m.role)}</span><span>${esc(m.nationality)}</span><span>${esc(m.language)}</span></div>`).join("")
       : `<div class="r empty">（メンバーを CONFIG.roster に追加してください）</div>`;
     return `<div class="roster-block"><div class="roster-h">${title}<span class="jp">${jp}</span></div>
-      <div class="roster-table"><div class="r head"><span>名前</span><span>役割</span><span>性別</span><span>国籍</span><span>言語</span></div>${rows}</div></div>`;
+      <div class="roster-table"><div class="r head"><span>名前</span><span>役割</span><span>国籍</span><span>言語</span></div>${rows}</div></div>`;
   };
   const r = CONFIG.roster;
   $("#rosterWrap").innerHTML = grp("PLAYERS","競技チーム",r.players)+grp("STREAMERS","ストリーマー",r.streamers)+grp("STAFF","スタッフ",r.staff);
@@ -751,7 +769,7 @@ function render(stepId){
         <div class="qcard hl"><div class="lbl">実質CPM</div><div class="big">${yen(q.divCpm)}</div><div class="sub">${esc(q.benchLabel)}（目安 ${yen(q.benchCpm)}）との比較 ↓</div></div>
       </div>
       ${compareBlock(q)}
-      <div class="note">※インプレッション/リーチは、各プランに含まれる露出枠と想定視聴数からの<b>目安</b>です（確約値ではありません）。${cpmNote.replace('<div class="note">','<span>').replace('</div>','</span>')}</div>
+      <div class="note">※インプレッション/リーチは<b>推定（目標とする想定値）</b>で、実績の保証ではありません。具体的な内容・数値はお打ち合わせを重ねて明確にしていきます。${cpmNote.replace('<div class="note">','<span>').replace('</div>','</span>')}</div>
       ${state.custom?`<div class="note">ご入力の予算に合わせて、特典内容やボリュームは調整可能です。<b>具体的な構成はお打ち合わせにて</b>。下のボタンからご連絡ください。</div>`:""}
       <div class="export-row">
         <button class="btn sm gold" data-action="printPdf">📄 PDFで保存（印刷）</button>
