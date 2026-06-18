@@ -125,6 +125,14 @@ a{color:inherit}
 .phi-term{font-family:'Bebas Neue','Noto Sans JP';font-weight:900;font-size:clamp(22px,3.5vw,30px);color:#fff;letter-spacing:.03em}
 .phi-mean{color:var(--muted);font-size:14px;margin-top:6px}
 .phi-belief{margin-top:18px;color:var(--gold-soft);font-size:15px;line-height:1.85;border-top:1px dashed var(--line);padding-top:16px}
+.inter-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(24px,4vw,48px);align-items:center}
+@media(max-width:760px){.inter-grid{grid-template-columns:1fr}}
+.cat-frame{position:relative;border:3px solid var(--gold);box-shadow:10px 10px 0 var(--orange);background:#000;aspect-ratio:4/3;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.cat-frame img{width:100%;height:100%;object-fit:cover;display:block}
+.cat-ph{display:none;flex-direction:column;align-items:center;gap:8px;color:var(--muted-2);font-size:13px;text-align:center;padding:20px;line-height:1.7}
+.cat-frame.noimg .cat-ph{display:flex}
+.cat-ph code{color:var(--gold);font-family:'Roboto Mono';font-size:13px;border:1px solid var(--line);padding:3px 8px}
+.cat-cap{font-family:'Roboto Mono';font-size:12px;color:var(--muted);margin-top:10px;letter-spacing:.04em}
 
 .roster-block{margin-top:18px}
 .roster-h{font-family:'Bebas Neue';letter-spacing:.08em;font-size:22px;color:var(--orange);margin:26px 0 10px;display:flex;align-items:center;gap:12px}
@@ -444,6 +452,26 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
   </div>
 </section>
 
+<div class="divider"></div>
+
+<section id="intermission">
+  <div class="wrap">
+    <div class="kicker-row"><span class="bar"></span><span class="eyebrow gold">INTERMISSION ・ ひと休み</span></div>
+    <h2 class="sec-title" style="margin-bottom:8px">むずかしい話は、<br>いったん休憩。</h2>
+    <div class="inter-grid" style="margin-top:26px">
+      <div>
+        <div class="cat-frame" id="catFrame">
+          <div class="cat-ph">ここに Supreme の猫の写真を置いてください<br><code>supreme-cat.jpg</code></div>
+        </div>
+        <div class="cat-cap">Supreme と、相棒。</div>
+      </div>
+      <div>
+        <p class="lead">Supremeは、大の<b style="color:var(--gold)">猫好き</b>。数字や戦略の話が続きましたが、ここで少し肩の力を抜きましょう。スポンサーシップも、最後は人と人です。気負わず、まずは気軽にお話しできたら嬉しいです。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="contact" id="contact">
   <div class="wrap">
     <div class="eyebrow" style="color:#000">LET'S BUILD SOMETHING</div>
@@ -510,6 +538,7 @@ const CONFIG = {
   about: {
     slogan: "ALWAYS CHASE THE 1%",
     motto: "LUCE IN ALTIS",
+    catPhoto: "supreme-cat.jpg",   // ← 猫写真のファイル名（リポジトリ直下に置く）。空 "" で非表示
     intro: "99DIVINEは2024年設立のeスポーツチーム。チーム名には「99から100へ＝完璧に到達するための、無限の挑戦と可能性」という意味を込めています。OWCS Pacificで王者となったのち、2025年に拠点を日本へ移籍。競技チームに加え、ストリーマー部門・アカデミー・自主大会を擁し、大会の枠を越えて幅広い層へ届く構造を強みにしています。",
     owner: {
       name: "Supreme",
@@ -977,6 +1006,11 @@ function renderCalc(){
 }
 
 /* ============================================================ CONTACT + INIT ============================================================ */
+function buildIntermission(){
+  const src=CONFIG.about.catPhoto, frame=$("#catFrame"); if(!frame) return;
+  if(src){ const img=new Image(); img.alt="Supreme and his cat"; img.onerror=()=>frame.classList.add("noimg"); img.src=src; frame.insertBefore(img,frame.firstChild); }
+  else { frame.classList.add("noimg"); }
+}
 function buildContact(){
   $("#yr").textContent=new Date().getFullYear();
   $("#mailBtn").href=`mailto:${CONFIG.team.contactEmail}?subject=${encodeURIComponent("【スポンサーシップ相談】99Divine")}`;
@@ -984,7 +1018,7 @@ function buildContact(){
 }
 document.addEventListener("DOMContentLoaded",()=>{
   buildHero(); buildTicker(); buildAbout(); buildRoster(); buildOwcsExplain();
-  buildTiers(); buildCalc(); buildContact();
+  buildTiers(); buildCalc(); buildIntermission(); buildContact();
   go("intro",true);
   $("#backBtn").addEventListener("click",()=>{ back(); pinWizard(); });
   $("#restartBtn").addEventListener("click",()=>{ state.history=[]; state.budget=0; state.custom=false; state.period="season"; go("intro",true); pinWizard(); });
